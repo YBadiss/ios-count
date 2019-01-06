@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bEk-nf-vNX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Counter View Controller-->
+        <scene sceneID="0Lg-bb-S8d">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="bEk-nf-vNX" customClass="CounterViewController" customModule="Count" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Onx-Z0-Va4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Counter Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puf-8D-pOI">
+                                <rect key="frame" x="121" y="137" width="132" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Counter Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A82-ed-AjJ">
+                                <rect key="frame" x="129" y="196" width="116" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Puf-8D-pOI" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="121" id="7ex-nE-8dA"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="centerX" secondItem="Puf-8D-pOI" secondAttribute="centerX" id="IoO-7g-bCc"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="top" secondItem="Puf-8D-pOI" secondAttribute="bottom" constant="38" id="S6h-ld-fUa"/>
+                            <constraint firstItem="Puf-8D-pOI" firstAttribute="centerX" secondItem="Onx-Z0-Va4" secondAttribute="centerX" id="Ylw-7k-HTx"/>
+                            <constraint firstItem="Puf-8D-pOI" firstAttribute="top" secondItem="I9z-6I-XPj" secondAttribute="top" constant="117" id="jXa-Zv-jxM"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="129" id="v4i-wD-1Ph"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="I9z-6I-XPj"/>
                     </view>
+                    <connections>
+                        <outlet property="counterName" destination="Puf-8D-pOI" id="Dcm-nc-kUB"/>
+                        <outlet property="counterStatus" destination="A82-ed-AjJ" id="vnN-TS-brP"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5uR-gy-ntf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-418.39999999999998" y="-325.18740629685158"/>
         </scene>
     </scenes>
 </document>
