@@ -13,6 +13,8 @@ class CounterViewController: UIViewController {
     @IBOutlet weak var counterStatus: UILabel!
     
     var counter: Counter?
+    var id: Int?
+    var saveDelegate: SaveCounterDelegate?
     
     @objc func changeValue(gesture : UISwipeGestureRecognizer) {
         counter!.value += gesture.direction == UISwipeGestureRecognizer.Direction.up ? 1 : -1
@@ -22,14 +24,12 @@ class CounterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        self.counter = loadCounter()
         
-        let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.changeValue))
+        let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeValue))
         upGesture.direction = UISwipeGestureRecognizer.Direction.up
         self.view.addGestureRecognizer(upGesture)
         
-        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.changeValue))
+        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeValue))
         downGesture.direction = UISwipeGestureRecognizer.Direction.down
         self.view.addGestureRecognizer(downGesture)
         
@@ -37,21 +37,8 @@ class CounterViewController: UIViewController {
     }
     
     private func update() {
-        saveCounter()
+        saveDelegate!.saveCounter(id!, counter: counter!)
         render()
-    }
-    
-    private func loadCounter() -> Counter? {
-        let userDefaults = UserDefaults.standard
-        if let counterData = userDefaults.data(forKey: "counter") {
-            return Counter.decode(counterData)
-        }
-        return Counter(name: "Gym", value: 0, objective: 5)
-    }
-    
-    private func saveCounter() {
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(counter!.encode(), forKey: "counter")
     }
     
     private func render() {

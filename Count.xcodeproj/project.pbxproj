@@ -13,6 +13,10 @@
 		99D4EDDA21E21E9900278066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99D4EDD921E21E9900278066 /* Assets.xcassets */; };
 		99D4EDE521E21EA600278066 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDE421E21EA600278066 /* Counter.swift */; };
 		99D4EDEB21E2275600278066 /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDEA21E2275600278066 /* CounterViewController.swift */; };
+		99D4EDED21E2571000278066 /* CounterPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */; };
+		99D4EDF121E25E6D00278066 /* SaveCounterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDF021E25E6D00278066 /* SaveCounterDelegate.swift */; };
+		99D4EDF321E2648000278066 /* AddPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDF221E2648000278066 /* AddPageViewController.swift */; };
+		99D4EDF521E2662800278066 /* AddCounterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDF421E2662800278066 /* AddCounterDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		99D4EDDE21E21E9900278066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99D4EDE421E21EA600278066 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		99D4EDEA21E2275600278066 /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
+		99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterPagesViewController.swift; sourceTree = "<group>"; };
+		99D4EDF021E25E6D00278066 /* SaveCounterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCounterDelegate.swift; sourceTree = "<group>"; };
+		99D4EDF221E2648000278066 /* AddPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPageViewController.swift; sourceTree = "<group>"; };
+		99D4EDF421E2662800278066 /* AddCounterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCounterDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,10 @@
 				99D4EDDE21E21E9900278066 /* Info.plist */,
 				99D4EDE421E21EA600278066 /* Counter.swift */,
 				99D4EDEA21E2275600278066 /* CounterViewController.swift */,
+				99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */,
+				99D4EDF021E25E6D00278066 /* SaveCounterDelegate.swift */,
+				99D4EDF221E2648000278066 /* AddPageViewController.swift */,
+				99D4EDF421E2662800278066 /* AddCounterDelegate.swift */,
 			);
 			path = Count;
 			sourceTree = "<group>";
@@ -140,7 +152,11 @@
 				99D4EDD521E21E9700278066 /* ViewController.swift in Sources */,
 				99D4EDEB21E2275600278066 /* CounterViewController.swift in Sources */,
 				99D4EDD321E21E9700278066 /* AppDelegate.swift in Sources */,
+				99D4EDF321E2648000278066 /* AddPageViewController.swift in Sources */,
 				99D4EDE521E21EA600278066 /* Counter.swift in Sources */,
+				99D4EDF121E25E6D00278066 /* SaveCounterDelegate.swift in Sources */,
+				99D4EDED21E2571000278066 /* CounterPagesViewController.swift in Sources */,
+				99D4EDF521E2662800278066 /* AddCounterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
