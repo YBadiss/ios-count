@@ -18,27 +18,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Counter Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puf-8D-pOI">
-                                <rect key="frame" x="121" y="137" width="132" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A82-ed-AjJ">
+                                <rect key="frame" x="129" y="228" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Counter Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A82-ed-AjJ">
-                                <rect key="frame" x="129" y="196" width="116" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puf-8D-pOI">
+                                <rect key="frame" x="0.0" y="90" width="375" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="v3I-RQ-kDW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Puf-8D-pOI" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="121" id="7ex-nE-8dA"/>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="centerX" secondItem="Puf-8D-pOI" secondAttribute="centerX" id="IoO-7g-bCc"/>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="top" secondItem="Puf-8D-pOI" secondAttribute="bottom" constant="38" id="S6h-ld-fUa"/>
-                            <constraint firstItem="Puf-8D-pOI" firstAttribute="centerX" secondItem="Onx-Z0-Va4" secondAttribute="centerX" id="Ylw-7k-HTx"/>
-                            <constraint firstItem="Puf-8D-pOI" firstAttribute="top" secondItem="I9z-6I-XPj" secondAttribute="top" constant="117" id="jXa-Zv-jxM"/>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="129" id="v4i-wD-1Ph"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="centerX" secondItem="Puf-8D-pOI" secondAttribute="centerX" id="5K3-vV-rQl"/>
+                            <constraint firstItem="Puf-8D-pOI" firstAttribute="leading" secondItem="Onx-Z0-Va4" secondAttribute="leading" id="EpM-MR-gzC"/>
+                            <constraint firstItem="Puf-8D-pOI" firstAttribute="top" secondItem="I9z-6I-XPj" secondAttribute="top" constant="70" id="Ow2-Zr-pAA"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="top" secondItem="Puf-8D-pOI" secondAttribute="bottom" constant="81" id="coy-VY-XQW"/>
+                            <constraint firstAttribute="trailing" secondItem="Puf-8D-pOI" secondAttribute="trailing" id="hqD-so-bKs"/>
+                            <constraint firstItem="A82-ed-AjJ" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="129" id="kza-yo-Uob"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I9z-6I-XPj"/>
                     </view>
@@ -49,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5uR-gy-ntf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="-325"/>
+            <point key="canvasLocation" x="-12" y="-325.18740629685158"/>
         </scene>
         <!--Add Page View Controller-->
         <scene sceneID="pnd-DY-3wy">
@@ -60,9 +63,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpc-MR-uZY">
-                                <rect key="frame" x="172" y="303" width="30" height="60"/>
+                                <rect key="frame" x="171" y="297" width="33" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                 <state key="normal" title="+"/>
                             </button>
                         </subviews>

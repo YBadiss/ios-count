@@ -19,7 +19,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         self.dataSource = self
         
         while let _ = loadCounterViewController(id: pages.count) {}
-        let _ = getAddPageViewController()
+        pages.append(createAddPageViewController())
         
         setViewControllers([pages.first!], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
     }
@@ -74,13 +74,10 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         return nil
     }
     
-    private func getAddPageViewController() -> UIViewController {
-        if pages.isEmpty {
-            let v = storyboard!.instantiateViewController(withIdentifier: "AddPageViewController") as! AddPageViewController
-            v.addCounterDelegate = self
-            pages.append(v)
-        }
-        return pages.last!
+    private func createAddPageViewController() -> AddPageViewController {
+        let v = storyboard!.instantiateViewController(withIdentifier: "AddPageViewController") as! AddPageViewController
+        v.addCounterDelegate = self
+        return v
     }
     
     private func appendCounterPage(_ id: Int, counter: Counter) -> CounterViewController {
