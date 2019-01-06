@@ -10,22 +10,39 @@ import Foundation
 import UIKit
 
 struct Counter: Codable {
-    var name: String
-    var value: Int {
-        didSet {
-            if value < 0 {
-                value = 0
-            }
-            else if value > objective {
-                value = objective
+    private var _name: String
+    var name: String {
+        get { return _name }
+        set(newName) {
+            if !newName.isEmpty {
+                _name = newName
             }
         }
     }
-    var objective: Int
+    private var _value: Int
+    var value: Int {
+        get { return _value }
+        set(newValue) {
+            if newValue >= 0 || newValue <= objective {
+                _value = newValue
+            }
+        }
+    }
+    private var _objective: Int
+    var objective: Int {
+        get { return _objective }
+        set(newObjective) {
+            if newObjective >= 0 {
+                _objective = newObjective
+            }
+        }
+    }
     var done: Bool { return value == objective }
-    var status: String {
-        let doneMark = done ? " ✅" : ""
-        return "\(value)/\(objective)\(doneMark)"
+    
+    init(name: String) {
+        self._name = name
+        self._value = 0
+        self._objective = 10
     }
     
     func encode() -> Data {

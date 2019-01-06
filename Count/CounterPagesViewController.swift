@@ -58,7 +58,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     
     func addCounter() {
         let id = pages.count - 1
-        let counter = Counter(name: dataKey(id), value: 0, objective: 10)
+        let counter = Counter(name: dataKey(id))
         let v = appendCounterPage(id, counter: counter)
         setViewControllers([v], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
     }

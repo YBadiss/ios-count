@@ -18,17 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A82-ed-AjJ">
-                                <rect key="frame" x="129" y="228" width="117" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A82-ed-AjJ">
+                                <rect key="frame" x="102" y="226" width="78" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puf-8D-pOI">
-                                <rect key="frame" x="0.0" y="90" width="375" height="57"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Counter Name" placeholder="Counter" textAlignment="center" minimumFontSize="30" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qne-Qw-09E">
+                                <rect key="frame" x="0.0" y="63" width="375" height="51"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="v3I-RQ-kDW"/>
+                                    <constraint firstAttribute="height" constant="51" id="Ixv-sI-SQe"/>
                                 </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="counterNameEditingEnded:" destination="bEk-nf-vNX" eventType="editingDidEnd" id="YnG-3S-OIf"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Objective" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4kC-eN-G3s">
+                                <rect key="frame" x="194" y="225" width="152" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="counterObjectiveEditingEnded:" destination="bEk-nf-vNX" eventType="editingDidEnd" id="5AY-7j-MRd"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wU5-Xq-mek">
+                                <rect key="frame" x="179" y="225" width="17" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,17 +57,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="centerX" secondItem="Puf-8D-pOI" secondAttribute="centerX" id="5K3-vV-rQl"/>
-                            <constraint firstItem="Puf-8D-pOI" firstAttribute="leading" secondItem="Onx-Z0-Va4" secondAttribute="leading" id="EpM-MR-gzC"/>
-                            <constraint firstItem="Puf-8D-pOI" firstAttribute="top" secondItem="I9z-6I-XPj" secondAttribute="top" constant="70" id="Ow2-Zr-pAA"/>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="top" secondItem="Puf-8D-pOI" secondAttribute="bottom" constant="81" id="coy-VY-XQW"/>
-                            <constraint firstAttribute="trailing" secondItem="Puf-8D-pOI" secondAttribute="trailing" id="hqD-so-bKs"/>
-                            <constraint firstItem="A82-ed-AjJ" firstAttribute="leading" secondItem="I9z-6I-XPj" secondAttribute="leading" constant="129" id="kza-yo-Uob"/>
+                            <constraint firstItem="qne-Qw-09E" firstAttribute="leading" secondItem="Onx-Z0-Va4" secondAttribute="leading" id="8Tt-CE-cSO"/>
+                            <constraint firstItem="qne-Qw-09E" firstAttribute="top" secondItem="I9z-6I-XPj" secondAttribute="top" constant="43" id="CLq-jJ-3XM"/>
+                            <constraint firstAttribute="trailing" secondItem="qne-Qw-09E" secondAttribute="trailing" id="xfm-0M-88t"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I9z-6I-XPj"/>
                     </view>
                     <connections>
-                        <outlet property="counterName" destination="Puf-8D-pOI" id="Dcm-nc-kUB"/>
+                        <outlet property="counterName" destination="qne-Qw-09E" id="8ho-kM-a1H"/>
+                        <outlet property="counterObjective" destination="4kC-eN-G3s" id="ewj-LO-KGN"/>
                         <outlet property="counterStatus" destination="A82-ed-AjJ" id="vnN-TS-brP"/>
                     </connections>
                 </viewController>
