@@ -9,7 +9,7 @@
 
 import UIKit
 
-class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SaveCounterDelegate, AddCounterDelegate {
+class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SaveCounterDelegate, AddCounterDelegate, DeleteCounterDelegate {
     var pages = [UIViewController]()
     
     override func viewDidLoad() {
@@ -49,18 +49,20 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         return pages.count
     }
     
-    func saveCounter(_ id: Int, counter: Counter) {
-        let userDefaults = UserDefaults.standard
-        print("Saving for id \(id)")
-        userDefaults.set(counter.encode(), forKey: dataKey(id))
-    }
-    
     func addCounter() {
         let id = pages.count - 1
         let counter = Counter(name: dataKey(id))
         let v = appendCounterPage(id, counter: counter)
         setViewControllers([v], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         v.edit()
+    }
+    
+    func deleteCounter(_ counterView: UIViewController) {
+        if let idx = pages.firstIndex(of: counterView) {
+            removeCounter(idx)
+            pages.remove(at: idx)
+            setViewControllers([pages[min(idx, pages.endIndex)]], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
+        }
     }
     
     private func dataKey(_ id: Int) -> String {
@@ -85,9 +87,16 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         v.counter = counter
         v.id = id
         v.saveDelegate = self
+        v.deleteDelegate = self
         saveCounter(id, counter: counter)
         pages.insert(v, at: id)
         return v
+    }
+    
+    func saveCounter(_ id: Int, counter: Counter) {
+        let userDefaults = UserDefaults.standard
+        print("Saving for id \(id)")
+        userDefaults.set(counter.encode(), forKey: dataKey(id))
     }
     
     private func loadCounter(_ id: Int) -> Counter? {
@@ -99,6 +108,11 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         }
         print("id \(id) not found")
         return nil
+    }
+    
+    private func removeCounter(_ id: Int) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: dataKey(id))
     }
 }
 

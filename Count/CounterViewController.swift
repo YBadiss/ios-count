@@ -9,17 +9,20 @@
 import UIKit
 
 class CounterViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var counterStatus: UILabel!
+    @IBOutlet weak var counterValue: UILabel!
     @IBOutlet weak var counterName: UITextField!
     @IBOutlet weak var counterObjective: UITextField!
     @IBOutlet weak var valueChangeLabel: UILabel!
     @IBOutlet weak var fillUpGauge: UIView!
+    @IBOutlet weak var deleteCounterButton: UIBarButtonItem!
     
     var counter: Counter?
     var id: Int?
-    var saveDelegate: SaveCounterDelegate?
     var editFields = [UITextField]()
     var gaugeHeightConstraint:NSLayoutConstraint?
+    
+    var saveDelegate: SaveCounterDelegate?
+    var deleteDelegate: DeleteCounterDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,9 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+        deleteCounterButton.target = self
+        deleteCounterButton.action = #selector(deleteCounter)
         
         editFields.append(counterName)
         editFields.append(counterObjective)
@@ -60,7 +66,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     @objc func changeValue(gesture : UISwipeGestureRecognizer) {
         let isUp = gesture.direction == UISwipeGestureRecognizer.Direction.up
         if counter!.addToValue(isUp ? 1 : -1) {
-            animateChangeLabel(isUp, fromPosition: gesture.location(in: view))
+            animateChangeLabel(isUp, fromPosition: counterValue!.center)
             update()
         }
     }
@@ -90,12 +96,24 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         update()
     }
     
+    @objc private func deleteCounter() {
+        deleteDelegate!.deleteCounter(self)
+    }
+    
     private func animateChangeLabel(_ isUp: Bool, fromPosition: CGPoint) {
+        // Use this to have a text outline
+        //        let strokeTextAttributes: [NSAttributedString.Key : Any] = [
+        //            .strokeColor : UIColor.black,
+        //            .foregroundColor : isUp ? UIColor.green : UIColor.red,
+        //            .strokeWidth : -2.0,
+        //            ]
+        //        valueChangeLabel.attributedText = NSAttributedString(string: isUp ? "+1" : "-1", attributes: strokeTextAttributes)
         valueChangeLabel.text = isUp ? "+1" : "-1"
-        valueChangeLabel.alpha = 0.6
         valueChangeLabel.textColor = isUp ? .green : .red
+        
+        valueChangeLabel.alpha = 0.6
         valueChangeLabel.center = fromPosition
-        let newY: CGFloat = valueChangeLabel.center.y + 70 * (isUp ? -1 : 1)
+        let newY: CGFloat = fromPosition.y + 50 * (isUp ? -1 : 1)
         UIView.animate(withDuration: 0.7) {
             self.valueChangeLabel.center.y = newY
             self.valueChangeLabel.alpha = 0
@@ -109,7 +127,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     
     private func render() {
         counterName.text = counter!.name
-        counterStatus.text = String(counter!.value)
+        counterValue.text = String(counter!.value)
         counterObjective.text = String(counter!.objective)
         if counter!.done {
             counterObjective.text?.append(" ✅")
