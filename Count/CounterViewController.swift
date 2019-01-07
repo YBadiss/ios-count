@@ -16,6 +16,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     var counter: Counter?
     var id: Int?
     var saveDelegate: SaveCounterDelegate?
+    var editFields = [UITextField]()
     
     @objc func changeValue(gesture : UISwipeGestureRecognizer) {
         counter!.value += gesture.direction == UISwipeGestureRecognizer.Direction.up ? 1 : -1
@@ -37,20 +38,30 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        counterName.delegate = self
-        counterObjective.delegate = self
+        editFields.append(counterName)
+        editFields.append(counterObjective)
+        editFields.forEach { $0.delegate = self }
         
         render()
     }
     
+    func edit() {
+        editFields.first?.becomeFirstResponder()
+    }
+    
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        counterName.resignFirstResponder()
-        counterObjective.resignFirstResponder()
+        view.window?.firstResponder?.resignFirstResponder()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        counterName.resignFirstResponder()
-        counterObjective.resignFirstResponder()
+        if let firstResponder = view.window?.firstResponder as? UITextField {
+            firstResponder.resignFirstResponder()
+            if let idx = editFields.firstIndex(of: firstResponder) {
+                if idx < editFields.endIndex {
+                    editFields[idx + 1].becomeFirstResponder()
+                }
+            }
+        }
         return true
     }
     

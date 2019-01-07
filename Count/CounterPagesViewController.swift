@@ -10,7 +10,6 @@
 import UIKit
 
 class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SaveCounterDelegate, AddCounterDelegate {
-    
     var pages = [UIViewController]()
     
     override func viewDidLoad() {
@@ -61,6 +60,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         let counter = Counter(name: dataKey(id))
         let v = appendCounterPage(id, counter: counter)
         setViewControllers([v], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
+        v.edit()
     }
     
     private func dataKey(_ id: Int) -> String {
