@@ -12,16 +12,14 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var counterStatus: UILabel!
     @IBOutlet weak var counterName: UITextField!
     @IBOutlet weak var counterObjective: UITextField!
+    @IBOutlet weak var valueChangeLabel: UILabel!
+    @IBOutlet weak var fillUpGauge: UIView!
     
     var counter: Counter?
     var id: Int?
     var saveDelegate: SaveCounterDelegate?
     var editFields = [UITextField]()
-    
-    @objc func changeValue(gesture : UISwipeGestureRecognizer) {
-        counter!.value += gesture.direction == UISwipeGestureRecognizer.Direction.up ? 1 : -1
-        update()
-    }
+    var gaugeHeightConstraint:NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +40,29 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         editFields.append(counterObjective)
         editFields.forEach { $0.delegate = self }
         
+        valueChangeLabel.alpha = 0
+        
+        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge,
+                                                   attribute: NSLayoutConstraint.Attribute.height,
+                                                   relatedBy: NSLayoutConstraint.Relation.equal,
+                                                   toItem: nil,
+                                                   attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                                                   multiplier: 1,
+                                                   constant: 300)
+        gaugeHeightConstraint!.isActive = true
         render()
     }
     
     func edit() {
         editFields.first?.becomeFirstResponder()
+    }
+    
+    @objc func changeValue(gesture : UISwipeGestureRecognizer) {
+        let isUp = gesture.direction == UISwipeGestureRecognizer.Direction.up
+        if counter!.addToValue(isUp ? 1 : -1) {
+            animateChangeLabel(isUp, fromPosition: gesture.location(in: view))
+            update()
+        }
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -74,6 +90,18 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         update()
     }
     
+    private func animateChangeLabel(_ isUp: Bool, fromPosition: CGPoint) {
+        valueChangeLabel.text = isUp ? "+1" : "-1"
+        valueChangeLabel.alpha = 0.6
+        valueChangeLabel.textColor = isUp ? .green : .red
+        valueChangeLabel.center = fromPosition
+        let newY: CGFloat = valueChangeLabel.center.y + 70 * (isUp ? -1 : 1)
+        UIView.animate(withDuration: 0.7) {
+            self.valueChangeLabel.center.y = newY
+            self.valueChangeLabel.alpha = 0
+        }
+    }
+    
     private func update() {
         saveDelegate!.saveCounter(id!, counter: counter!)
         render()
@@ -86,5 +114,16 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         if counter!.done {
             counterObjective.text?.append(" ✅")
         }
+        
+        let factor = CGFloat(counter!.value) / CGFloat(counter!.objective)
+        fillUpGauge.removeConstraint(gaugeHeightConstraint!)
+        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge,
+                                                   attribute: NSLayoutConstraint.Attribute.height,
+                                                   relatedBy: NSLayoutConstraint.Relation.equal,
+                                                   toItem: nil,
+                                                   attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                                                   multiplier: 1,
+                                                   constant: 300 * factor)
+        gaugeHeightConstraint!.isActive = true
     }
 }

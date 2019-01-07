@@ -19,15 +19,20 @@ struct Counter: Codable {
             }
         }
     }
+    
     private var _value: Int
     var value: Int {
         get { return _value }
-        set(newValue) {
-            if newValue >= 0 || newValue <= objective {
-                _value = newValue
-            }
-        }
     }
+    mutating func addToValue(_ change: Int) -> Bool {
+        let newValue = _value + change
+        if newValue < 0 || newValue > objective {
+            return false
+        }
+        _value = newValue
+        return true
+    }
+    
     private var _objective: Int
     var objective: Int {
         get { return _objective }
@@ -37,6 +42,7 @@ struct Counter: Codable {
             }
         }
     }
+    
     var done: Bool { return value == objective }
     
     init(name: String) {
