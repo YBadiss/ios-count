@@ -55,6 +55,7 @@
                                 <items>
                                     <navigationItem id="hT3-Hy-h8B">
                                         <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="FBx-dy-dam"/>
                                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="QSl-jO-vx9"/>
                                     </navigationItem>
                                 </items>
@@ -101,6 +102,7 @@
                         <viewLayoutGuide key="safeArea" id="I9z-6I-XPj"/>
                     </view>
                     <connections>
+                        <outlet property="addCounterButton" destination="FBx-dy-dam" id="buw-bJ-YWq"/>
                         <outlet property="counterName" destination="EQy-9r-QeK" id="ldq-YE-sxp"/>
                         <outlet property="counterObjective" destination="4kC-eN-G3s" id="ewj-LO-KGN"/>
                         <outlet property="counterValue" destination="A82-ed-AjJ" id="pxf-bu-LeY"/>

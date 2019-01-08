@@ -6,10 +6,10 @@
 //  Copyright © 2019 Yacine Badiss. All rights reserved.
 //
 
-
 import UIKit
 
-class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SaveCounterDelegate, AddCounterDelegate, DeleteCounterDelegate {
+class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CounterViewDelegate {
+    
     var pages = [UIViewController]()
     
     override func viewDidLoad() {
@@ -18,9 +18,14 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         self.dataSource = self
         
         while let _ = loadCounterViewController(id: pages.count) {}
-        pages.append(createAddPageViewController())
-        
-        setViewControllers([pages.first!], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
+        if (pages.isEmpty) {
+            addCounter()
+        } else  {
+            setViewControllers([pages.first!],
+                               direction: UIPageViewController.NavigationDirection.forward,
+                               animated: false,
+                               completion: nil)
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController)-> UIViewController? {
@@ -50,18 +55,18 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     }
     
     func addCounter() {
-        let id = pages.count - 1
+        let id = pages.count
         let counter = Counter(name: dataKey(id))
         let v = appendCounterPage(id, counter: counter)
         setViewControllers([v], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         v.edit()
     }
     
-    func deleteCounter(_ counterView: UIViewController) {
+    func removeCounter(_ counterView: UIViewController) {
         if let idx = pages.firstIndex(of: counterView) {
-            removeCounter(idx)
+            deleteCounter(idx)
             pages.remove(at: idx)
-            setViewControllers([pages[min(idx, pages.endIndex)]], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
+            setViewControllers([pages[min(idx, pages.count - 1)]], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         }
     }
     
@@ -76,18 +81,11 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         return nil
     }
     
-    private func createAddPageViewController() -> AddPageViewController {
-        let v = storyboard!.instantiateViewController(withIdentifier: "AddPageViewController") as! AddPageViewController
-        v.addCounterDelegate = self
-        return v
-    }
-    
     private func appendCounterPage(_ id: Int, counter: Counter) -> CounterViewController {
         let v: CounterViewController = storyboard!.instantiateViewController(withIdentifier: "CounterViewController") as! CounterViewController
         v.counter = counter
         v.id = id
-        v.saveDelegate = self
-        v.deleteDelegate = self
+        v.counterDelegate = self
         saveCounter(id, counter: counter)
         pages.insert(v, at: id)
         return v
@@ -110,7 +108,10 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         return nil
     }
     
-    private func removeCounter(_ id: Int) {
+    private func deleteCounter(_ id: Int) {
+        // TODO this may hide some counters on reload of the app
+        // I should store this in an sqlite and just select everything to display
+        // Also we need sqlite to store the event times (one event = hour + day + total change)
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: dataKey(id))
     }

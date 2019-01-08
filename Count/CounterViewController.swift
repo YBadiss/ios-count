@@ -15,14 +15,14 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var valueChangeLabel: UILabel!
     @IBOutlet weak var fillUpGauge: UIView!
     @IBOutlet weak var deleteCounterButton: UIBarButtonItem!
+    @IBOutlet weak var addCounterButton: UIBarButtonItem!
     
     var counter: Counter?
     var id: Int?
     var editFields = [UITextField]()
     var gaugeHeightConstraint:NSLayoutConstraint?
     
-    var saveDelegate: SaveCounterDelegate?
-    var deleteDelegate: DeleteCounterDelegate?
+    var counterDelegate: CounterViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,8 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         
         deleteCounterButton.target = self
         deleteCounterButton.action = #selector(deleteCounter)
+        addCounterButton.target = self
+        addCounterButton.action = #selector(addCounter)
         
         editFields.append(counterName)
         editFields.append(counterObjective)
@@ -97,7 +99,11 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func deleteCounter() {
-        deleteDelegate!.deleteCounter(self)
+        counterDelegate!.removeCounter(self)
+    }
+    
+    @objc private func addCounter() {
+        counterDelegate!.addCounter()
     }
     
     private func animateChangeLabel(_ isUp: Bool, fromPosition: CGPoint) {
@@ -121,7 +127,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func update() {
-        saveDelegate!.saveCounter(id!, counter: counter!)
+        counterDelegate!.saveCounter(id!, counter: counter!)
         render()
     }
     
