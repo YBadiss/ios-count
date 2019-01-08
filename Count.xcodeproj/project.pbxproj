@@ -16,6 +16,8 @@
 		99D4EDED21E2571000278066 /* CounterPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */; };
 		99D4EDF721E3D7B700278066 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDF621E3D7B700278066 /* UIViewExtension.swift */; };
 		99D4EDFB21E52E0800278066 /* CounterViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDFA21E52E0800278066 /* CounterViewDelegate.swift */; };
+		99D4EDFD21E5432100278066 /* StoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDFC21E5432100278066 /* StoreDelegate.swift */; };
+		99D4EDFF21E5444D00278066 /* SimpleStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDFE21E5444D00278066 /* SimpleStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterPagesViewController.swift; sourceTree = "<group>"; };
 		99D4EDF621E3D7B700278066 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		99D4EDFA21E52E0800278066 /* CounterViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewDelegate.swift; sourceTree = "<group>"; };
+		99D4EDFC21E5432100278066 /* StoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDelegate.swift; sourceTree = "<group>"; };
+		99D4EDFE21E5444D00278066 /* SimpleStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				99D4EDEC21E2571000278066 /* CounterPagesViewController.swift */,
 				99D4EDF621E3D7B700278066 /* UIViewExtension.swift */,
 				99D4EDFA21E52E0800278066 /* CounterViewDelegate.swift */,
+				99D4EDFC21E5432100278066 /* StoreDelegate.swift */,
+				99D4EDFE21E5444D00278066 /* SimpleStorage.swift */,
 			);
 			path = Count;
 			sourceTree = "<group>";
@@ -152,6 +158,8 @@
 				99D4EDE521E21EA600278066 /* Counter.swift in Sources */,
 				99D4EDFB21E52E0800278066 /* CounterViewDelegate.swift in Sources */,
 				99D4EDF721E3D7B700278066 /* UIViewExtension.swift in Sources */,
+				99D4EDFD21E5432100278066 /* StoreDelegate.swift in Sources */,
+				99D4EDFF21E5444D00278066 /* SimpleStorage.swift in Sources */,
 				99D4EDED21E2571000278066 /* CounterPagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

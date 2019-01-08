@@ -11,11 +11,13 @@ import UIKit
 class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CounterViewDelegate {
     
     var pages = [UIViewController]()
+    var store: StoreDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
+        store = SimpleStorage()
         
         while let _ = loadCounterViewController(id: pages.count) {}
         if (pages.isEmpty) {
@@ -64,7 +66,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     
     func removeCounter(_ counterView: UIViewController) {
         if let idx = pages.firstIndex(of: counterView) {
-            deleteCounter(idx)
+            store!.deleteCounter(idx)
             pages.remove(at: idx)
             setViewControllers([pages[min(idx, pages.count - 1)]], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         }
@@ -75,7 +77,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     }
     
     private func loadCounterViewController(id: Int) -> CounterViewController? {
-        if let counter = loadCounter(id) {
+        if let counter = store!.getCounter(id) {
             return appendCounterPage(id, counter: counter)
         }
         return nil
@@ -86,34 +88,13 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         v.counter = counter
         v.id = id
         v.counterDelegate = self
-        saveCounter(id, counter: counter)
+        store!.createCounter(id, counter: counter)
         pages.insert(v, at: id)
         return v
     }
     
     func saveCounter(_ id: Int, counter: Counter) {
-        let userDefaults = UserDefaults.standard
-        print("Saving for id \(id)")
-        userDefaults.set(counter.encode(), forKey: dataKey(id))
-    }
-    
-    private func loadCounter(_ id: Int) -> Counter? {
-        print("Loading for id \(id)...")
-        let userDefaults = UserDefaults.standard
-        if let counterData = userDefaults.data(forKey: dataKey(id)) {
-            print("Loaded id \(id)!")
-            return Counter.decode(counterData)
-        }
-        print("id \(id) not found")
-        return nil
-    }
-    
-    private func deleteCounter(_ id: Int) {
-        // TODO this may hide some counters on reload of the app
-        // I should store this in an sqlite and just select everything to display
-        // Also we need sqlite to store the event times (one event = hour + day + total change)
-        let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: dataKey(id))
+        store!.updateCounter(id, counter: counter)
     }
 }
 
