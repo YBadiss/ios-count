@@ -17,7 +17,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        store = SimpleStorage()
+        store = DbStore()
         
         while let _ = loadCounterViewController(id: pages.count) {}
         if (pages.isEmpty) {
