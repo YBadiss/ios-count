@@ -5,48 +5,61 @@
 //  Created by Yacine Badiss on 08/01/2019.
 //  Copyright © 2019 Yacine Badiss. All rights reserved.
 //
-//import SQLite
+import SQLite
 import Foundation
 
 class DbStore: StoreDelegate {
-//    var db: Connection
-//    
-//    init() {
-//        db = try Connection("counter_db.sqlite3")
-//    }
+    private var db: Connection
+    private var counters: Table
+    private var id: Expression<Int64>
+    private var name: Expression<String>
+    private var value: Expression<Int>
+    private var objective: Expression<Int>
     
-    func getCounter(_ id: Int) -> Counter? {
-        print("Get counter for id \(id)...")
-        let userDefaults = UserDefaults.standard
-        if let counterData = userDefaults.data(forKey: dataKey(id)) {
-            print("Retrieved counter for id \(id)!")
-            return Counter.decode(counterData)
+    init() {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        db = try! Connection("\(path)/counter_db.sqlite3")
+        counters = Table("counters")
+        id = Expression<Int64>("id")
+        name = Expression<String>("name")
+        value = Expression<Int>("value")
+        objective = Expression<Int>("objective")
+        
+        let _ = try? db.run(counters.create { t in
+            t.column(id, primaryKey: true)
+            t.column(name)
+            t.column(value)
+            t.column(objective)
+        })
+    }
+    
+    func getCounters() -> [Counter] {
+        return try! db.prepare(counters).map {
+            Counter(id: $0[id], name: $0[name], value: $0[value], objective: $0[objective])
         }
-        print("Counter not found for id \(id)")
-        return nil
     }
     
-    func createCounter(_ id: Int, counter: Counter) -> Int {
-        updateCounter(id, counter: counter)
-        return id
+    func createCounter() -> Counter {
+        let insert = counters.insert(name <- name, value <- 0, objective <- 0)
+        let rowid = try! db.run(insert)
+        let counter = Counter(id: rowid)
+        updateCounter(counter)
+        
+        print("Created new counter \(counter)")
+        return counter
     }
     
-    func updateCounter(_ id: Int, counter: Counter) {
-        let userDefaults = UserDefaults.standard
-        print("Saving for id \(id)")
-        userDefaults.set(counter.encode(), forKey: dataKey(id))
+    func updateCounter(_ counter: Counter) {
+        print("Updating counter with \(counter)")
+        let counterRow = counters.filter(id == counter.id)
+        try! db.run(counterRow.update(name <- counter.name, value <- counter.value, objective <- counter.objective))
     }
     
-    func deleteCounter(_ id: Int) {
-        // TODO this may hide some counters on reload of the app
-        // I should store this in an sqlite and just select everything to display
+    func deleteCounter(_ counter: Counter) {
         // Also we need sqlite to store the event times (one event = hour + day + total change)
-        let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: dataKey(id))
-    }
-    
-    private func dataKey(_ id: Int) -> String {
-        return "Counter \(id + 1)"
+        print("Deleting counter \(counter)")
+        let counterRow = counters.filter(id == counter.id)
+        try! db.run(counterRow.delete())
     }
 }
 

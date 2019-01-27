@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 struct Counter: Codable {
+    private var _id: Int64
+    var id: Int64 {
+        get { return _id }
+    }
+
     private var _name: String
     var name: String {
         get { return _name }
@@ -19,7 +24,7 @@ struct Counter: Codable {
             }
         }
     }
-    
+
     private var _value: Int
     var value: Int {
         get { return _value }
@@ -45,10 +50,11 @@ struct Counter: Codable {
     
     var done: Bool { return value == objective }
     
-    init(name: String) {
+    init(id: Int64, name: String = "Counter", value: Int = 0, objective: Int = 10) {
+        self._id = id
         self._name = name
-        self._value = 0
-        self._objective = 10
+        self._value = value
+        self._objective = objective
     }
     
     func encode() -> Data {

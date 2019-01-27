@@ -18,7 +18,6 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addCounterButton: UIBarButtonItem!
     
     var counter: Counter?
-    var id: Int?
     var editFields = [UITextField]()
     var gaugeHeightConstraint:NSLayoutConstraint?
     
@@ -127,7 +126,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func update() {
-        counterDelegate!.saveCounter(id!, counter: counter!)
+        counterDelegate!.saveCounter(counter!)
         render()
     }
     

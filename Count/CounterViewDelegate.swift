@@ -10,6 +10,6 @@ import UIKit
 
 protocol CounterViewDelegate {
     func addCounter()
-    func removeCounter(_ counterView: UIViewController)
-    func saveCounter(_ id: Int, counter: Counter)
+    func removeCounter(_ counterView: CounterViewController)
+    func saveCounter(_ counter: Counter)
 }

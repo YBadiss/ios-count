@@ -9,8 +9,8 @@
 import Foundation
 
 protocol StoreDelegate {
-    func getCounter(_ id: Int) -> Counter?
-    func createCounter(_ id: Int, counter: Counter) -> Int
-    func updateCounter(_ id: Int, counter: Counter)
-    func deleteCounter(_ id: Int)
+    func getCounters() -> [Counter]
+    func createCounter() -> Counter
+    func updateCounter(_ counter: Counter)
+    func deleteCounter(_ counter: Counter)
 }

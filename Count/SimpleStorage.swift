@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SimpleStorage: StoreDelegate {
+class SimpleStorage {
     func getCounter(_ id: Int) -> Counter? {
         print("Get counter for id \(id)...")
         let userDefaults = UserDefaults.standard

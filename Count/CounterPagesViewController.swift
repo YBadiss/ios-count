@@ -19,7 +19,10 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         dataSource = self
         store = DbStore()
         
-        while let _ = loadCounterViewController(id: pages.count) {}
+        for counter in store!.getCounters() {
+            let _ = appendCounterPage(counter)
+        }
+
         if (pages.isEmpty) {
             addCounter()
         } else  {
@@ -34,8 +37,8 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         
         let cur = pages.index(of: viewController)!
         
-//         if you prefer to NOT scroll circularly, simply add here:
-         if cur == 0 { return nil }
+        // if you prefer to NOT scroll circularly, simply add here:
+        if cur == 0 { return nil }
         
         let prev = abs((cur - 1) % pages.count)
         return pages[prev]
@@ -46,7 +49,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
         let cur = pages.index(of: viewController)!
         
         // if you prefer to NOT scroll circularly, simply add here:
-         if cur == (pages.count - 1) { return nil }
+        if cur == (pages.count - 1) { return nil }
         
         let next = abs((cur + 1) % pages.count)
         return pages[next]
@@ -57,44 +60,29 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     }
     
     func addCounter() {
-        let id = pages.count
-        let counter = Counter(name: dataKey(id))
-        let v = appendCounterPage(id, counter: counter)
+        let v = appendCounterPage()
         setViewControllers([v], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         v.edit()
     }
     
-    func removeCounter(_ counterView: UIViewController) {
+    func removeCounter(_ counterView: CounterViewController) {
         if let idx = pages.firstIndex(of: counterView) {
-            store!.deleteCounter(idx)
+            store!.deleteCounter(counterView.counter!)
             pages.remove(at: idx)
             setViewControllers([pages[min(idx, pages.count - 1)]], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         }
     }
     
-    private func dataKey(_ id: Int) -> String {
-        return "Counter \(id + 1)"
-    }
-    
-    private func loadCounterViewController(id: Int) -> CounterViewController? {
-        if let counter = store!.getCounter(id) {
-            return appendCounterPage(id, counter: counter)
-        }
-        return nil
-    }
-    
-    private func appendCounterPage(_ id: Int, counter: Counter) -> CounterViewController {
+    private func appendCounterPage(_ counter: Counter? = nil) -> CounterViewController {
         let v: CounterViewController = storyboard!.instantiateViewController(withIdentifier: "CounterViewController") as! CounterViewController
-        v.counter = counter
-        v.id = id
+        v.counter = counter ?? store!.createCounter()
         v.counterDelegate = self
-        store!.createCounter(id, counter: counter)
-        pages.insert(v, at: id)
+        pages.append(v)
         return v
     }
     
-    func saveCounter(_ id: Int, counter: Counter) {
-        store!.updateCounter(id, counter: counter)
+    func saveCounter(_ counter: Counter) {
+        store!.updateCounter(counter)
     }
 }
 
