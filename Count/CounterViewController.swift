@@ -93,7 +93,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         update()
     }
     @IBAction func counterObjectiveEditingEnded(_ sender: Any) {
-        counter!.objective = Int(counterObjective.text ?? "") ?? -1
+        counter!.objective = Int64(counterObjective.text ?? "") ?? -1
         update()
     }
     

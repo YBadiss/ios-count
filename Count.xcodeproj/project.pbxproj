@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		992A6FF921FE5AAB00229BBA /* CounterTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A6FF821FE5AAB00229BBA /* CounterTable.swift */; };
+		992A6FFB21FE5BEE00229BBA /* ValueChangeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A6FFA21FE5BEE00229BBA /* ValueChangeTable.swift */; };
 		99D4EDD321E21E9700278066 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDD221E21E9700278066 /* AppDelegate.swift */; };
 		99D4EDD521E21E9700278066 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4EDD421E21E9700278066 /* ViewController.swift */; };
 		99D4EDD821E21E9700278066 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D4EDD621E21E9700278066 /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		992A6FF021FE2B2200229BBA /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		992A6FF521FE2CDE00229BBA /* SQLite.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SQLite.framework.dSYM; path = Carthage/Build/iOS/SQLite.framework.dSYM; sourceTree = "<group>"; };
+		992A6FF821FE5AAB00229BBA /* CounterTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTable.swift; sourceTree = "<group>"; };
+		992A6FFA21FE5BEE00229BBA /* ValueChangeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueChangeTable.swift; sourceTree = "<group>"; };
 		99D4EDCF21E21E9700278066 /* Count.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Count.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D4EDD221E21E9700278066 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99D4EDD421E21E9700278066 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 				99D4EDFC21E5432100278066 /* StoreDelegate.swift */,
 				99D4EDFE21E5444D00278066 /* SimpleStorage.swift */,
 				99D4EE0221E550A300278066 /* DbStore.swift */,
+				992A6FF821FE5AAB00229BBA /* CounterTable.swift */,
+				992A6FFA21FE5BEE00229BBA /* ValueChangeTable.swift */,
 			);
 			path = Count;
 			sourceTree = "<group>";
@@ -182,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992A6FFB21FE5BEE00229BBA /* ValueChangeTable.swift in Sources */,
 				99D4EDD521E21E9700278066 /* ViewController.swift in Sources */,
 				99D4EE0321E550A300278066 /* DbStore.swift in Sources */,
 				99D4EDEB21E2275600278066 /* CounterViewController.swift in Sources */,
@@ -189,6 +196,7 @@
 				99D4EDE521E21EA600278066 /* Counter.swift in Sources */,
 				99D4EDFB21E52E0800278066 /* CounterViewDelegate.swift in Sources */,
 				99D4EDF721E3D7B700278066 /* UIViewExtension.swift in Sources */,
+				992A6FF921FE5AAB00229BBA /* CounterTable.swift in Sources */,
 				99D4EDFD21E5432100278066 /* StoreDelegate.swift in Sources */,
 				99D4EDFF21E5444D00278066 /* SimpleStorage.swift in Sources */,
 				99D4EDED21E2571000278066 /* CounterPagesViewController.swift in Sources */,
