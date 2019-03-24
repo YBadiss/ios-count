@@ -156,13 +156,37 @@
                     <view key="view" contentMode="scaleToFill" id="kKG-pu-QH2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nvh-LP-l6f" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="156" width="343" height="491"/>
+                                <color key="backgroundColor" red="0.91238369159999999" green="0.91238369159999999" blue="0.91238369159999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Progression" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93x-hu-IlJ">
+                                <rect key="frame" x="133" y="60" width="108" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Nvh-LP-l6f" secondAttribute="bottom" constant="20" symbolic="YES" id="1Mb-uC-xLL"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="kKG-pu-QH2" secondAttribute="centerX" id="NC7-W8-o5w"/>
+                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="leading" secondItem="kKG-pu-QH2" secondAttribute="leadingMargin" id="g6E-YW-FWW"/>
+                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="top" secondItem="93x-hu-IlJ" secondAttribute="bottom" constant="70" id="gb9-vh-YI3"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="leading" secondItem="AZH-PB-BNv" secondAttribute="leading" constant="133" id="jlk-g1-kZj"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="Nvh-LP-l6f" secondAttribute="centerX" id="s7u-Ja-m9M"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="top" secondItem="AZH-PB-BNv" secondAttribute="top" constant="40" id="x3w-pB-cka"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AZH-PB-BNv"/>
                     </view>
+                    <connections>
+                        <outlet property="chartView" destination="Nvh-LP-l6f" id="RJY-x0-T6Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYB-JV-vea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="394"/>
+            <point key="canvasLocation" x="-12" y="393.55322338830587"/>
         </scene>
     </scenes>
 </document>
