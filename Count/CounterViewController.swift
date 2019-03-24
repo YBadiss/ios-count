@@ -60,6 +60,12 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         render()
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            counterDelegate!.showGraph(self)
+        }
+    }
+    
     func edit() {
         editFields.first?.becomeFirstResponder()
     }

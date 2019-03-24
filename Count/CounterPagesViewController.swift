@@ -11,6 +11,7 @@ import UIKit
 class CounterPagesViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CounterViewDelegate {
     
     var pages = [UIViewController]()
+    var graphPage: GraphViewController?
     var store: StoreDelegate?
     
     override func viewDidLoad() {
@@ -31,6 +32,8 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
                                animated: false,
                                completion: nil)
         }
+        
+        graphPage = storyboard!.instantiateViewController(withIdentifier: "GraphViewController") as? GraphViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController)-> UIViewController? {
@@ -83,6 +86,10 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     
     func saveCounter(_ counter: Counter) {
         store!.updateCounter(counter)
+    }
+    
+    func showGraph(_ counterView: CounterViewController) {
+        self.present(graphPage!, animated: true, completion: nil)
     }
 }
 
