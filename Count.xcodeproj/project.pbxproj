@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991A28292247E33900E8BC58 /* CounterValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A28282247E33900E8BC58 /* CounterValue.swift */; };
 		992A6FF921FE5AAB00229BBA /* CounterTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A6FF821FE5AAB00229BBA /* CounterTable.swift */; };
 		992A6FFB21FE5BEE00229BBA /* ValueChangeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A6FFA21FE5BEE00229BBA /* ValueChangeTable.swift */; };
 		994926FB22477AF20082AECB /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994926FA22477AF20082AECB /* GraphViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		991A28282247E33900E8BC58 /* CounterValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterValue.swift; sourceTree = "<group>"; };
 		992A6FF021FE2B2200229BBA /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		992A6FF521FE2CDE00229BBA /* SQLite.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SQLite.framework.dSYM; path = Carthage/Build/iOS/SQLite.framework.dSYM; sourceTree = "<group>"; };
 		992A6FF821FE5AAB00229BBA /* CounterTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTable.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				992A6FF821FE5AAB00229BBA /* CounterTable.swift */,
 				992A6FFA21FE5BEE00229BBA /* ValueChangeTable.swift */,
 				994926FA22477AF20082AECB /* GraphViewController.swift */,
+				991A28282247E33900E8BC58 /* CounterValue.swift */,
 			);
 			path = Count;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				992A6FFB21FE5BEE00229BBA /* ValueChangeTable.swift in Sources */,
+				991A28292247E33900E8BC58 /* CounterValue.swift in Sources */,
 				99D4EE0321E550A300278066 /* DbStore.swift in Sources */,
 				99D4EDEB21E2275600278066 /* CounterViewController.swift in Sources */,
 				99D4EDD321E21E9700278066 /* AppDelegate.swift in Sources */,

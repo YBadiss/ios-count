@@ -62,7 +62,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            counterDelegate!.showGraph(self)
+            counterDelegate!.showGraph(counter!)
         }
     }
     

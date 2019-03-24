@@ -161,27 +161,42 @@
                                 <rect key="frame" x="16" y="156" width="343" height="491"/>
                                 <color key="backgroundColor" red="0.91238369159999999" green="0.91238369159999999" blue="0.91238369159999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Progression" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93x-hu-IlJ">
-                                <rect key="frame" x="133" y="60" width="108" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progression" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93x-hu-IlJ">
+                                <rect key="frame" x="133" y="39" width="109" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="trn-0E-AMR">
+                                <rect key="frame" x="107" y="108" width="161" height="29"/>
+                                <segments>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                    <segment title="Month"/>
+                                </segments>
+                                <connections>
+                                    <action selector="doit:" destination="Ury-Pb-3Tq" eventType="editingDidEnd" id="4tJ-dq-yt9"/>
+                                    <action selector="precisionChanged:" destination="Ury-Pb-3Tq" eventType="valueChanged" id="aUF-nq-Sew"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Nvh-LP-l6f" secondAttribute="bottom" constant="20" symbolic="YES" id="1Mb-uC-xLL"/>
-                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="kKG-pu-QH2" secondAttribute="centerX" id="NC7-W8-o5w"/>
-                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="leading" secondItem="kKG-pu-QH2" secondAttribute="leadingMargin" id="g6E-YW-FWW"/>
-                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="top" secondItem="93x-hu-IlJ" secondAttribute="bottom" constant="70" id="gb9-vh-YI3"/>
-                            <constraint firstItem="93x-hu-IlJ" firstAttribute="leading" secondItem="AZH-PB-BNv" secondAttribute="leading" constant="133" id="jlk-g1-kZj"/>
-                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="Nvh-LP-l6f" secondAttribute="centerX" id="s7u-Ja-m9M"/>
-                            <constraint firstItem="93x-hu-IlJ" firstAttribute="top" secondItem="AZH-PB-BNv" secondAttribute="top" constant="40" id="x3w-pB-cka"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="top" secondItem="AZH-PB-BNv" secondAttribute="top" constant="19" id="8J3-vr-kVi"/>
+                            <constraint firstAttribute="bottom" secondItem="Nvh-LP-l6f" secondAttribute="bottom" constant="20" symbolic="YES" id="JJh-c9-4lK"/>
+                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="top" secondItem="trn-0E-AMR" secondAttribute="bottom" constant="20" id="Lye-Ez-XwP"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="kKG-pu-QH2" secondAttribute="centerX" id="c4h-CB-xr1"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="trn-0E-AMR" secondAttribute="centerX" id="cnb-cl-mTU"/>
+                            <constraint firstItem="trn-0E-AMR" firstAttribute="top" secondItem="93x-hu-IlJ" secondAttribute="bottom" constant="43" id="eIX-i4-3IN"/>
+                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="leading" secondItem="kKG-pu-QH2" secondAttribute="leadingMargin" id="jdz-0r-azJ"/>
+                            <constraint firstItem="93x-hu-IlJ" firstAttribute="leading" secondItem="AZH-PB-BNv" secondAttribute="leading" constant="133" id="wjA-t0-Qa0"/>
+                            <constraint firstItem="Nvh-LP-l6f" firstAttribute="centerX" secondItem="trn-0E-AMR" secondAttribute="centerX" id="z3R-Tf-Aov"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AZH-PB-BNv"/>
                     </view>
                     <connections>
                         <outlet property="chartView" destination="Nvh-LP-l6f" id="RJY-x0-T6Q"/>
+                        <outlet property="precisionSelector" destination="trn-0E-AMR" id="3Sz-Iw-BuF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYB-JV-vea" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -41,4 +41,16 @@ class ValueChangeTable {
         let insert = table.insert(self.timestamp <- Int64(timestamp.timeIntervalSince1970), self.counterId <- counterId, self.oldValue <- oldValue, self.newValue <- newValue)
         return try! db.run(insert)
     }
+    
+    func get(counterId: Int64) -> [CounterValue] {
+        var result = [CounterValue]()
+        for row in try! db.prepare(table.filter(self.counterId == counterId)) {
+            result.append(CounterValue(timestamp: row[timestamp], value: row[newValue]))
+        }
+        return result
+    }
+    
+    func delete(counterId: Int64) {
+        try! db.run(table.filter(self.counterId == counterId).delete())
+    }
 }

@@ -12,5 +12,5 @@ protocol CounterViewDelegate {
     func addCounter()
     func removeCounter(_ counterView: CounterViewController)
     func saveCounter(_ counter: Counter)
-    func showGraph(_ counterView: CounterViewController)
+    func showGraph(_ counter: Counter)
 }

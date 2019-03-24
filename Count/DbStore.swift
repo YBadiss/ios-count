@@ -24,22 +24,27 @@ class DbStore: StoreDelegate {
     func createCounter() -> Counter {
         let rowId = counters.insert(name: "", value: 0, objective: 0)
         let counter = Counter(id: rowId)
-        updateCounter(counter)
+        updateCounter(counter, isNew: true)
         print("Created new counter \(counter)")
         return counter
     }
     
-    func updateCounter(_ counter: Counter) {
+    func updateCounter(_ counter: Counter, isNew: Bool = false) {
         let oldCounter = counters.get(id: counter.id)!
         counters.update(id: counter.id, name: counter.name, value: counter.value, objective: counter.objective)
         
-        if counter.value != oldCounter.value {
+        if isNew || (counter.value != oldCounter.value) {
             let _ = valueChanges.insert(timestamp: Date(), counterId: counter.id, oldValue: oldCounter.value, newValue: counter.value)
         }
     }
     
+    func getCounterValues(_ counter: Counter) -> [CounterValue] {
+        return valueChanges.get(counterId: counter.id)
+    }
+    
     func deleteCounter(_ counter: Counter) {
         counters.delete(id: counter.id)
+        valueChanges.delete(counterId: counter.id)
     }
 }
 

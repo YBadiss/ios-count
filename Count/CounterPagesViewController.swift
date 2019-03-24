@@ -85,10 +85,12 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     }
     
     func saveCounter(_ counter: Counter) {
-        store!.updateCounter(counter)
+        store!.updateCounter(counter, isNew: false)
     }
     
-    func showGraph(_ counterView: CounterViewController) {
+    func showGraph(_ counter: Counter) {
+        graphPage!.counter = counter
+        graphPage!.values = store!.getCounterValues(counter)
         self.present(graphPage!, animated: true, completion: nil)
     }
 }
