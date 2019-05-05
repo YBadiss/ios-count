@@ -48,13 +48,23 @@ struct Counter: Codable {
         }
     }
     
+    public var dateTarget: Date
+    var dateTargetStr: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd-MMM-yyyy"
+            return formatter.string(from: dateTarget)
+        }
+    }
+    
     var done: Bool { return value == objective }
     
-    init(id: Int64, name: String = "Counter", value: Int64 = 0, objective: Int64 = 10) {
+    init(id: Int64, name: String = "Counter", value: Int64 = 0, objective: Int64 = 10, dateTarget: Date = Calendar.current.date(byAdding: .year, value: 1, to: Date())!) {
         self._id = id
         self._name = name
         self._value = value
         self._objective = objective
+        self.dateTarget = dateTarget
     }
     
     func encode() -> Data {

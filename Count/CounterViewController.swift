@@ -49,7 +49,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         
         valueChangeLabel.alpha = 0
         
-        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge,
+        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge as Any,
                                                    attribute: NSLayoutConstraint.Attribute.height,
                                                    relatedBy: NSLayoutConstraint.Relation.equal,
                                                    toItem: nil,
@@ -146,7 +146,7 @@ class CounterViewController: UIViewController, UITextFieldDelegate {
         
         let factor = CGFloat(counter!.value) / CGFloat(counter!.objective)
         fillUpGauge.removeConstraint(gaugeHeightConstraint!)
-        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge,
+        gaugeHeightConstraint = NSLayoutConstraint(item: fillUpGauge as Any,
                                                    attribute: NSLayoutConstraint.Attribute.height,
                                                    relatedBy: NSLayoutConstraint.Relation.equal,
                                                    toItem: nil,

@@ -12,6 +12,7 @@ import Charts
 class GraphViewController: UIViewController {
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var precisionSelector: UISegmentedControl!
+    @IBOutlet weak var dateTargetLabel: UILabel!
     
     var counter: Counter?
     var values = [CounterValue]()
@@ -32,6 +33,7 @@ class GraphViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        dateTargetLabel.text = counter!.dateTargetStr
         chartView.leftAxis.axisMinimum = 0
         chartView.rightAxis.enabled = false
         chartView!.animate(xAxisDuration: 0.75, yAxisDuration: 0.75)
@@ -64,12 +66,18 @@ class GraphViewController: UIViewController {
         let cal = Calendar.current
         var lineChartEntry = [ChartDataEntry]()
         
-        let groupedValues = Dictionary(grouping: values, by: { cal.ordinality(of: calendarPrecision, in: .year, for: $0.timestamp)! })
+        var groupedValues = Dictionary(grouping: values, by: { cal.ordinality(of: calendarPrecision, in: .year, for: $0.timestamp)! })
+        let todayKey = cal.ordinality(of: calendarPrecision, in: .year, for: Date())!
+        if let _ = groupedValues[todayKey] {}
+        else {
+            groupedValues[todayKey] = groupedValues[groupedValues.keys.max()!]
+        }
         for (x, values) in groupedValues {
             let last = values.max { a, b in a.timestamp < b.timestamp }
             lineChartEntry.append(ChartDataEntry(x: Double(x), y: Double(last!.value)))
         }
-        let dataLine = LineChartDataSet(values: lineChartEntry.sorted { a, b in a.x < b.x }, label: counter!.name)
+        
+        let dataLine = LineChartDataSet(entries: lineChartEntry.sorted { a, b in a.x < b.x }, label: counter!.name)
         dataLine.colors = [#colorLiteral(red: 0.3982805908, green: 0.8922122121, blue: 0.4089289308, alpha: 1)]
         dataLine.lineWidth = dataLine.lineWidth * 2
         dataLine.drawCircleHoleEnabled = false

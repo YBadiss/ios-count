@@ -38,7 +38,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController)-> UIViewController? {
         
-        let cur = pages.index(of: viewController)!
+        let cur = pages.firstIndex(of: viewController)!
         
         // if you prefer to NOT scroll circularly, simply add here:
         if cur == 0 { return nil }
@@ -49,7 +49,7 @@ class CounterPagesViewController: UIPageViewController, UIPageViewControllerData
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController)-> UIViewController? {
         
-        let cur = pages.index(of: viewController)!
+        let cur = pages.firstIndex(of: viewController)!
         
         // if you prefer to NOT scroll circularly, simply add here:
         if cur == (pages.count - 1) { return nil }

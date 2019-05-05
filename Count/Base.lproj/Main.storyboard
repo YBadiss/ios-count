@@ -179,15 +179,24 @@
                                     <action selector="precisionChanged:" destination="Ury-Pb-3Tq" eventType="valueChanged" id="aUF-nq-Sew"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Target" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dj1-rv-uhb">
+                                <rect key="frame" x="0.0" y="73" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="93x-hu-IlJ" firstAttribute="top" secondItem="AZH-PB-BNv" secondAttribute="top" constant="19" id="8J3-vr-kVi"/>
                             <constraint firstAttribute="bottom" secondItem="Nvh-LP-l6f" secondAttribute="bottom" constant="20" symbolic="YES" id="JJh-c9-4lK"/>
                             <constraint firstItem="Nvh-LP-l6f" firstAttribute="top" secondItem="trn-0E-AMR" secondAttribute="bottom" constant="20" id="Lye-Ez-XwP"/>
+                            <constraint firstItem="dj1-rv-uhb" firstAttribute="top" secondItem="93x-hu-IlJ" secondAttribute="bottom" constant="8" symbolic="YES" id="aaP-NG-Kon"/>
                             <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="kKG-pu-QH2" secondAttribute="centerX" id="c4h-CB-xr1"/>
                             <constraint firstItem="93x-hu-IlJ" firstAttribute="centerX" secondItem="trn-0E-AMR" secondAttribute="centerX" id="cnb-cl-mTU"/>
+                            <constraint firstItem="dj1-rv-uhb" firstAttribute="centerX" secondItem="93x-hu-IlJ" secondAttribute="centerX" id="dmh-4X-Oew"/>
                             <constraint firstItem="trn-0E-AMR" firstAttribute="top" secondItem="93x-hu-IlJ" secondAttribute="bottom" constant="43" id="eIX-i4-3IN"/>
+                            <constraint firstItem="dj1-rv-uhb" firstAttribute="leading" secondItem="kKG-pu-QH2" secondAttribute="leading" id="emQ-mV-C2N"/>
                             <constraint firstItem="Nvh-LP-l6f" firstAttribute="leading" secondItem="kKG-pu-QH2" secondAttribute="leadingMargin" id="jdz-0r-azJ"/>
                             <constraint firstItem="93x-hu-IlJ" firstAttribute="leading" secondItem="AZH-PB-BNv" secondAttribute="leading" constant="133" id="wjA-t0-Qa0"/>
                             <constraint firstItem="Nvh-LP-l6f" firstAttribute="centerX" secondItem="trn-0E-AMR" secondAttribute="centerX" id="z3R-Tf-Aov"/>
@@ -196,6 +205,7 @@
                     </view>
                     <connections>
                         <outlet property="chartView" destination="Nvh-LP-l6f" id="RJY-x0-T6Q"/>
+                        <outlet property="dateTargetLabel" destination="dj1-rv-uhb" id="oOi-Vz-NUq"/>
                         <outlet property="precisionSelector" destination="trn-0E-AMR" id="3Sz-Iw-BuF"/>
                     </connections>
                 </viewController>
