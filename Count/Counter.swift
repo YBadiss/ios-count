@@ -13,6 +13,7 @@ struct Counter: Codable {
     private var _id: Int64
     var id: Int64 {
         get { return _id }
+        set(newId) { _id = newId }
     }
 
     private var _name: String
@@ -48,23 +49,25 @@ struct Counter: Codable {
         }
     }
     
-    public var dateTarget: Date
-    var dateTargetStr: String {
+    public var startDate: Date
+    public var endDate: Date
+    var endDateStr: String {
         get {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd-MMM-yyyy"
-            return formatter.string(from: dateTarget)
+            return formatter.string(from: endDate)
         }
     }
     
     var done: Bool { return value == objective }
     
-    init(id: Int64, name: String = "Counter", value: Int64 = 0, objective: Int64 = 10, dateTarget: Date = Calendar.current.date(byAdding: .year, value: 1, to: Date())!) {
+    init(id: Int64, name: String = "Counter", value: Int64 = 0, objective: Int64 = 10, startDate: Date? = nil, endDate: Date? = nil) {
         self._id = id
         self._name = name
         self._value = value
         self._objective = objective
-        self.dateTarget = dateTarget
+        self.endDate = endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: startDate ?? Date())!
+        self.startDate = startDate ?? Date()
     }
     
     func encode() -> Data {

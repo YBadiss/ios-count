@@ -21,9 +21,9 @@ class GraphViewController: UIViewController {
         get { return Double(counter!.objective) }
     }
     private var precisionToCalendar: [String: Calendar.Component] = [
-    "Day": .day,
-    "Week": .weekOfYear,
-    "Month": .month
+        "Day": .day,
+        "Week": .weekOfYear,
+        "Month": .month
     ]
     private var calendarPrecision: Calendar.Component {
         get {
@@ -33,7 +33,7 @@ class GraphViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        dateTargetLabel.text = counter!.dateTargetStr
+        dateTargetLabel.text = counter!.endDateStr
         chartView.leftAxis.axisMinimum = 0
         chartView.rightAxis.enabled = false
         chartView!.animate(xAxisDuration: 0.75, yAxisDuration: 0.75)
@@ -53,41 +53,68 @@ class GraphViewController: UIViewController {
     
     private func render() {
         chartView.data = getChartData()
-        
-        chartView.leftAxis.axisMaximum = maximum * 1.05
-        let maxLine = ChartLimitLine.init(limit: maximum, label: "Target")
-        maxLine.lineColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-        chartView.leftAxis.removeAllLimitLines()
-        chartView.leftAxis.addLimitLine(maxLine)
     }
     
     private func getChartData() -> LineChartData {
-        let data = LineChartData()
-        let cal = Calendar.current
-        var lineChartEntry = [ChartDataEntry]()
+        let firstDate = values.map({$0.timestamp}).min()!
+        let firstKey = doubleFromDate(firstDate)
+        let lastDate = values.map({$0.timestamp}).max()!
+        let lastKey = doubleFromDate(lastDate)
+        let todayDate = Date()
+        let todayKey = doubleFromDate(todayDate)
         
-        var groupedValues = Dictionary(grouping: values, by: { cal.ordinality(of: calendarPrecision, in: .year, for: $0.timestamp)! })
-        let todayKey = cal.ordinality(of: calendarPrecision, in: .year, for: Date())!
+        var groupedValues = Dictionary(grouping: values, by: { doubleFromDate($0.timestamp) })
         if let _ = groupedValues[todayKey] {}
         else {
-            groupedValues[todayKey] = groupedValues[groupedValues.keys.max()!]
+            groupedValues[todayKey] = groupedValues[lastKey]
         }
+        
+        var dataEntries = [ChartDataEntry]()
+        // TODO rewrite with map
         for (x, values) in groupedValues {
             let last = values.max { a, b in a.timestamp < b.timestamp }
-            lineChartEntry.append(ChartDataEntry(x: Double(x), y: Double(last!.value)))
+            dataEntries.append(ChartDataEntry(x: x, y: Double(last!.value)))
         }
         
-        let dataLine = LineChartDataSet(entries: lineChartEntry.sorted { a, b in a.x < b.x }, label: counter!.name)
-        dataLine.colors = [#colorLiteral(red: 0.3982805908, green: 0.8922122121, blue: 0.4089289308, alpha: 1)]
-        dataLine.lineWidth = dataLine.lineWidth * 2
-        dataLine.drawCircleHoleEnabled = false
-        dataLine.circleRadius = dataLine.circleRadius * 0.5
-        dataLine.circleColors = [#colorLiteral(red: 0, green: 0.7384181023, blue: 0, alpha: 1)]
-        dataLine.valueFormatter = DefaultValueFormatter(decimals: 0)
+        let startDateInterval = counter!.startDate.timeIntervalSince1970
+        let a = Double(counter!.objective) / (counter!.endDate.timeIntervalSince1970 - startDateInterval)
+        let targetEntries = [
+            ChartDataEntry(x: firstKey, y: a * (firstDate.timeIntervalSince1970 - startDateInterval)),
+            ChartDataEntry(x: todayKey, y: a * (todayDate.timeIntervalSince1970 - startDateInterval))
+        ]
         
+        let data = LineChartData()
         data.clearValues()
-        data.addDataSet(dataLine)
+        data.addDataSet(makeDataLine(entries: dataEntries.sorted { a, b in a.x < b.x }))
+        data.addDataSet(makeTargetLine(entries: targetEntries))
         return data
+    }
+    
+    private func makeDataLine(entries: [ChartDataEntry]) -> LineChartDataSet {
+        let line = makeLine(descriptor: "Progress", entries: entries, color: #colorLiteral(red: 0, green: 0.7384181023, blue: 0, alpha: 1))
+        line.lineWidth = line.lineWidth * 2
+        return line
+    }
+    
+    private func makeTargetLine(entries: [ChartDataEntry]) -> LineChartDataSet{
+        let line = makeLine(descriptor: "Target", entries: entries, color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
+        line.circleRadius = line.circleRadius * 0.5
+        return line
+    }
+    
+    private func makeLine(descriptor: String, entries: [ChartDataEntry], color: UIColor) -> LineChartDataSet {
+        let line = LineChartDataSet(entries: entries, label: "\(counter!.name) \(descriptor)")
+        line.colors = [color]
+        line.circleColors = [color]
+        line.drawCircleHoleEnabled = false
+        line.circleRadius = line.circleRadius * 0.5
+        line.valueFormatter = DefaultValueFormatter(decimals: 0)
+        return line
+    }
+    
+    private func doubleFromDate(_ date: Date) -> Double {
+        let cal = Calendar.current
+        return Double(cal.ordinality(of: calendarPrecision, in: .year, for: date)!)
     }
 }
 
