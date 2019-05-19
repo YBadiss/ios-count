@@ -66,8 +66,8 @@ struct Counter: Codable {
         self._name = name
         self._value = value
         self._objective = objective
-        self.endDate = endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: startDate ?? Date())!
         self.startDate = startDate ?? Date()
+        self.endDate = endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: startDate ?? Date())!
     }
     
     func encode() -> Data {

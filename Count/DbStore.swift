@@ -23,7 +23,7 @@ class DbStore: StoreDelegate {
     
     func createCounter() -> Counter {
         var counter = Counter(id: -1)
-        let rowId = counters.insert(name: counter.name, value: counter.value, objective: counter.objective, start: Int64(counter.startDate.timeIntervalSince1970), end: Int64(counter.startDate.timeIntervalSince1970))
+        let rowId = counters.insert(name: counter.name, value: counter.value, objective: counter.objective, start: Int64(counter.startDate.timeIntervalSince1970), end: Int64(counter.endDate.timeIntervalSince1970))
         counter.id = rowId
         updateCounter(counter, isNew: true)
         print("Created new counter \(counter)")
@@ -32,7 +32,7 @@ class DbStore: StoreDelegate {
     
     func updateCounter(_ counter: Counter, isNew: Bool = false) {
         let oldCounter = counters.get(id: counter.id)!
-        counters.update(id: counter.id, name: counter.name, value: counter.value, objective: counter.objective, start: Int64(counter.startDate.timeIntervalSince1970), end: Int64(counter.startDate.timeIntervalSince1970))
+        counters.update(id: counter.id, name: counter.name, value: counter.value, objective: counter.objective, start: Int64(counter.startDate.timeIntervalSince1970), end: Int64(counter.endDate.timeIntervalSince1970))
         
         if isNew || (counter.value != oldCounter.value) {
             let _ = valueChanges.insert(timestamp: Date(), counterId: counter.id, oldValue: oldCounter.value, newValue: counter.value)
